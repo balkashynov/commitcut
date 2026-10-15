@@ -1,31 +1,72 @@
 # CommitCut
 
-**Your duplicate-webhook test passes. What if the worker dies between two database writes?**
+[![CommitCut: the duplicate test passes, but a crash leaves zero credits after two successful retries.](docs/assets/commitcut-hero.svg)](https://balkashynov.github.io/commitcut/#case=0&cut=2-after)
 
-CommitCut kills your real application at PostgreSQL acknowledgement boundaries, restarts it, redelivers a signed webhook, and checks durable business state. No sleeps or crash hooks in your handler.
+<p align="center">
+  <a href="https://balkashynov.github.io/commitcut/#case=0&amp;cut=2-after"><strong>Explore the recorded failure →</strong></a>
+  &nbsp; · &nbsp; <a href="#try-it">Run it locally</a>
+  &nbsp; · &nbsp; <a href="docs/DESIGN.md">Read the protocol design</a>
+</p>
 
-[Interactive recorded demo](https://balkashynov.github.io/commitcut/) · [Protocol design](docs/DESIGN.md) · [Why this project](docs/RESEARCH.md) · [Pinned OpenSaaS case](examples/opensaas/README.md)
+<p align="center">
+  <a href="https://github.com/balkashynov/commitcut/actions/workflows/ci.yml"><img src="https://github.com/balkashynov/commitcut/actions/workflows/ci.yml/badge.svg" alt="Linux and macOS verification" /></a>
+</p>
+
+**Turn a webhook's crash window into a repeatable CI failure.** CommitCut runs your real application through a Rust PostgreSQL proxy, kills the worker at a selected database acknowledgement boundary, restarts it, redelivers a signed fixture, and checks business state with SQL. No sleeps or crash hooks in your handler.
+
+For developers whose Stripe handlers grant credits, provision access, or record fulfillment in PostgreSQL. A normal duplicate-delivery test can pass while a worker crash still loses or duplicates the effect. CommitCut makes that gap visible before you ship.
+
+## See the bug in 60 seconds
+
+1. **[Open the failing cut](https://balkashynov.github.io/commitcut/#case=0&cut=2-after).** The event receipt committed, but the worker died before the database response reached it.
+2. **Inspect recovery.** Both redeliveries return `204`. The handler sees an existing receipt and skips fulfillment. The customer has **0 credits**, expected **10**.
+3. **[Switch to one transaction](https://balkashynov.github.io/commitcut/#case=2).** Receipt and credits commit together. All ten tested cuts recover to **10 credits**.
+
+The demo is an interactive viewer of **recorded executions**, with query timelines, transaction state, recovery responses and SQL assertions. It does not run a database in your browser.
+
+## Real crashes. Checkable results.
+
+Every scenario passes its unfaulted restart-and-duplicate baseline. Injecting crashes separates the unsafe handlers from their transactional controls:
+
+| Handler | Failure after recovery | Violating cuts / tested cuts |
+| :--- | :--- | ---: |
+| Record receipt, then grant credits (`pg`) | **0 credits** instead of 10 | **2 / 6** |
+| Grant credits, then record receipt (`pg`) | **20 credits** instead of 10 | **2 / 6** |
+| Receipt + credit grant in one transaction (`pg`) | None observed; **10 credits** | **0 / 10** |
+| Unchanged pinned OpenSaaS helper (Prisma) | **0 credits** instead of 10 | **4 / 8** |
+| Our transactional replacement (Prisma) | None observed; **10 credits** | **0 / 12** |
+
+**42 cuts per full matrix. Two local release runs, 84 cuts, zero inconclusive outcomes.** Counts describe this bounded fixture, not production failure rates. The examples use real PostgreSQL, actual `SIGKILL`s, `pg` / Prisma, and the official Stripe SDK for signature verification.
+
+The OpenSaaS case uses an unmodified, attributed helper pinned to a specific revision in a small dependency harness. It is not a full deployed Wasp application or a live Stripe payment test.
+
+[Complete reports and validation](docs/VALIDATION.md) · [Upstream source and harness scope](examples/opensaas/README.md) · [Why this project / prior art](docs/RESEARCH.md)
+
+## The boundary that matters
 
 ```text
-Claim first:   record event → CRASH → grant credits
-Retry:         event already handled → HTTP 204
-Customer:      0 credits. Expected 10.
-
-Effect first:  grant credits → CRASH → record event
-Retry:         event not recorded → grant again
-Customer:      20 credits. Expected 10.
-
-One transaction: receipt + credits commit together
-Every tested cut: recovery leaves 10 credits.
+Application            CommitCut proxy                 PostgreSQL
+    │                        │                              │
+    ├──── query ────────────►├──────── query ──────────────►│
+    │                        │                       write commits
+    │                        │◄──── complete response ─────┤
+    │                  buffer response                      │
+    ✕  SIGKILL         withhold every byte                 │
+    │                                                       │
+ restart + replay ───────────────► inspect surviving business state
 ```
 
-The examples use **real PostgreSQL, actual SIGKILLs, pg/Prisma, and the official Stripe SDK**. An unmodified pinned OpenSaaS helper demonstrates the omission in a small dependency harness. See [scope and provenance](examples/opensaas/README.md); this is not a complete deployed-application or live Stripe test.
+PostgreSQL finishing a write and the application observing its acknowledgement are different events. CommitCut buffers the full server response through `ReadyForQuery`, then kills the worker before forwarding any of it. It also tests the boundary before each observed query cycle executes.
+
+The proxy handles simple and extended query protocols, prepared statements, portals and binary parameters/results. It tracks transaction status, including a failed `COMMIT` that returns `ROLLBACK`. Unsupported protocol behavior and uncertain recovery produce an **inconclusive** result, never a green test. [Read the protocol contract and tests](docs/DESIGN.md).
 
 ## Try it
 
 Requires Python 3.11+, Rust 1.93+, Node 22+, PostgreSQL with `psql`. Linux and macOS are the intended platforms.
 
 ```sh
+git clone https://github.com/balkashynov/commitcut.git
+cd commitcut
 cargo build --release
 python3 -m venv .venv
 .venv/bin/pip install .
