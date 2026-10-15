@@ -1,0 +1,63 @@
+name: Verify real crashes
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.10
+        env:
+          POSTGRES_USER: commitcut
+          POSTGRES_DB: commitcut_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U commitcut -d commitcut_test"
+          --health-interval 1s --health-timeout 5s --health-retries 20
+    env:
+      COMMITCUT_DATABASE_URL: postgresql://commitcut@127.0.0.1:5432/commitcut_test
+      PYTHONPATH: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.93.0
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test && cargo build
+      - run: python -m pip install . && commitcut --help
+      - run: python -m unittest discover -s tests -p test_runner.py -v
+      - run: python -m unittest discover -s tests -p test_report.py -v
+      - run: python -m unittest discover -s tests -p test_protocol.py -v
+        env:
+          COMMITCUT_PROTOCOL_TESTS: '1'
+      - run: npm ci --prefix examples/stripe-credits && npm ci --prefix examples/opensaas
+      - run: npx prisma generate
+        working-directory: examples/opensaas
+        env:
+          DATABASE_URL: postgresql://commitcut@127.0.0.1:5432/commitcut_test
+      - run: python scripts/verify-examples.py --upstream --output .runs/ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crash-evidence-postgres16-linux
+          path: .runs/ci
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.93.0
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test
+      - run: PYTHONPATH=python python -m unittest discover -s tests -p test_runner.py -v
+      - run: PYTHONPATH=python python -m unittest discover -s tests -p test_report.py -v

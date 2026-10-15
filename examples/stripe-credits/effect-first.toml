@@ -1,0 +1,27 @@
+name = "Stripe credits: effect-first"
+reset_sql = "reset.sql"
+timeout_seconds = 10
+redeliveries = 2
+
+[app]
+command = ["node", "server.mjs"]
+health_path = "/health"
+
+[app.env]
+HANDLER_MODE = "effect-first"
+STRIPE_WEBHOOK_SECRET = "whsec_commitcut_synthetic_fixture"
+
+[request]
+path = "/webhook"
+body_file = "invoice.json"
+stripe_secret_env = "STRIPE_WEBHOOK_SECRET"
+
+[[assertions]]
+name = "Exactly ten purchased credits survive recovery"
+sql = "SELECT credits FROM accounts WHERE customer_id = 'cus_commitcut'"
+expected = "10"
+
+[[assertions]]
+name = "One durable event receipt"
+sql = "SELECT count(*) FROM processed_events"
+expected = "1"

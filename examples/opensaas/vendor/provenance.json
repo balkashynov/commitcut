@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/wasp-lang/open-saas",
+  "commit": "925602ceafb5a0988a3b2ba72d754f022f121699",
+  "path": "template/app/src/payment/processedWebhookEvent.ts",
+  "sha256": "baf876e05c432b5d2ef5442097bea6d0974dfd5746f24e5b22c56b3861279170",
+  "source_changed": false,
+  "license": "MIT",
+  "retrieved_date": "2026-10-15",
+  "scope": "Unmodified helper in a dependency harness using real Prisma 5.19.1 and PostgreSQL; not the complete Wasp app."
+}

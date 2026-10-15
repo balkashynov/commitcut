@@ -1,0 +1,6 @@
+{
+  "name": "commitcut-opensaas-harness",
+  "private": true,
+  "type": "module",
+  "dependencies": {"@prisma/client": "5.19.1", "prisma": "5.19.1", "tsx": "4.20.6", "stripe": "18.1.0"}
+}

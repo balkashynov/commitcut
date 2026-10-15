@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16.10
+    environment:
+      POSTGRES_USER: commitcut
+      POSTGRES_PASSWORD: commitcut_local_test
+      POSTGRES_DB: commitcut_test
+    ports:
+      - "127.0.0.1:55439:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U commitcut -d commitcut_test"]
+      interval: 1s
+      timeout: 3s
+      retries: 20

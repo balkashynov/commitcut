@@ -1,0 +1,1 @@
+{"id":"evt_commitcut_001","object":"event","type":"invoice.paid","livemode":false,"created":1792022400,"data":{"object":{"id":"in_commitcut_001","object":"invoice","customer":"cus_commitcut","paid":true,"metadata":{"credits":"10"}}}}

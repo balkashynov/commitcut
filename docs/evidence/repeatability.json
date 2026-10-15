@@ -1,0 +1,22 @@
+[
+  {
+    "scenario": "claim-first",
+    "identical_except_elapsed_time_and_ephemeral_listener_address": true
+  },
+  {
+    "scenario": "effect-first",
+    "identical_except_elapsed_time_and_ephemeral_listener_address": true
+  },
+  {
+    "scenario": "atomic",
+    "identical_except_elapsed_time_and_ephemeral_listener_address": true
+  },
+  {
+    "scenario": "upstream",
+    "identical_except_elapsed_time_and_ephemeral_listener_address": true
+  },
+  {
+    "scenario": "transactional-control",
+    "identical_except_elapsed_time_and_ephemeral_listener_address": true
+  }
+]

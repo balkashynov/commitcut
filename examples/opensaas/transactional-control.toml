@@ -1,0 +1,27 @@
+name = "OpenSaaS pinned helper: transactional-control"
+reset_sql = "reset.sql"
+timeout_seconds = 15
+redeliveries = 2
+
+[app]
+command = ["node", "--import", "tsx", "server.ts"]
+health_path = "/health"
+
+[app.env]
+HANDLER_MODE = "transactional-control"
+STRIPE_WEBHOOK_SECRET = "whsec_commitcut_synthetic_fixture"
+
+[request]
+path = "/webhook"
+body_file = "../stripe-credits/invoice.json"
+stripe_secret_env = "STRIPE_WEBHOOK_SECRET"
+
+[[assertions]]
+name = "Ten purchased credits survive recovery"
+sql = """SELECT "credits" FROM "Account" WHERE "customerId" = 'cus_commitcut'"""
+expected = "10"
+
+[[assertions]]
+name = "One durable event receipt"
+sql = 'SELECT count(*) FROM "ProcessedWebhookEvent"'
+expected = "1"

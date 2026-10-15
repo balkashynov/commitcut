@@ -1,0 +1,5755 @@
+{
+  "format_version": 1,
+  "name": "OpenSaaS pinned helper: transactional-control",
+  "scope": "observed PostgreSQL query-cycle boundaries; application SIGKILL, database remains running",
+  "baseline": {
+    "cut": 0,
+    "phase": "baseline",
+    "status": "pass",
+    "first_response": {
+      "status": 204
+    },
+    "trace": [
+      {
+        "address": "127.0.0.1:57103",
+        "event": "ready",
+        "version": "0.1.0"
+      },
+      {
+        "event": "armed"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "state_before": "I"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "BEGIN"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 1,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "I"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 2,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "INSERT 0 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 3,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 4,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "UPDATE 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 5,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "COMMIT"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 6,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "sqlstates": [],
+        "state_after": "I",
+        "state_before": "T"
+      }
+    ],
+    "boundaries": [
+      {
+        "commands": [
+          "BEGIN"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 1,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "I"
+      },
+      {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 2,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "commands": [
+          "INSERT 0 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 3,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 4,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "commands": [
+          "UPDATE 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 5,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "commands": [
+          "COMMIT"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 6,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "sqlstates": [],
+        "state_after": "I",
+        "state_before": "T"
+      }
+    ],
+    "recovery_responses": [
+      {
+        "status": 204
+      },
+      {
+        "status": 204
+      }
+    ],
+    "assertions": [
+      {
+        "name": "Ten purchased credits survive recovery",
+        "expected": "10",
+        "actual": "10",
+        "passed": true
+      },
+      {
+        "name": "One durable event receipt",
+        "expected": "1",
+        "actual": "1",
+        "passed": true
+      }
+    ],
+    "recovery_trace": [
+      {
+        "address": "127.0.0.1:57116",
+        "event": "ready",
+        "version": "0.1.0"
+      },
+      {
+        "event": "armed"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "state_before": "I"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "BEGIN"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 1,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "I"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 2,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "INSERT 0 0"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 3,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "COMMIT"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 4,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "sqlstates": [],
+        "state_after": "I",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "state_before": "I"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "BEGIN"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 5,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "I"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "INSERT 0 0"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 6,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      {
+        "boundary": {
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "state_before": "T"
+        },
+        "event": "begin"
+      },
+      {
+        "commands": [
+          "COMMIT"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 7,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "sqlstates": [],
+        "state_after": "I",
+        "state_before": "T"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "cut": 1,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 1,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "state_before": "I"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57131",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57142",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 1,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [
+          "BEGIN"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 1,
+        "protocol": "simple",
+        "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+        "sql": [
+          "BEGIN"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "I"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57157",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "commands": [
+              "BEGIN"
+            ],
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "sqlstates": [],
+            "state_after": "T",
+            "state_before": "I"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57168",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 2,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 2,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57183",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57194",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 2,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 2,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57209",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "commands": [],
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "sqlstates": [],
+            "state_after": "T",
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57220",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 3,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 3,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57235",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57246",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 3,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [
+          "INSERT 0 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 3,
+        "protocol": "extended",
+        "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+        "sql": [
+          "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57262",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "commands": [
+              "INSERT 0 1"
+            ],
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "sqlstates": [],
+            "state_after": "T",
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57274",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 4,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 4,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57290",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57302",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 4,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [],
+        "connection": 1,
+        "event": "boundary",
+        "index": 4,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57318",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "commands": [],
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "sqlstates": [],
+            "state_after": "T",
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57329",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 5,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 5,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57344",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57355",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 5,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [
+          "UPDATE 1"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 5,
+        "protocol": "extended",
+        "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+        "sql": [
+          "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+        ],
+        "sqlstates": [],
+        "state_after": "T",
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57370",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "commands": [
+              "UPDATE 1"
+            ],
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "sqlstates": [],
+            "state_after": "T",
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57381",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 6,
+      "phase": "before",
+      "status": "pass",
+      "boundary": {
+        "connection": 1,
+        "event": "boundary",
+        "index": 6,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57397",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "before"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57409",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 8,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 8,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 9,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 9,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    },
+    {
+      "cut": 6,
+      "phase": "after",
+      "status": "pass",
+      "boundary": {
+        "commands": [
+          "COMMIT"
+        ],
+        "connection": 1,
+        "event": "boundary",
+        "index": 6,
+        "protocol": "simple",
+        "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+        "sql": [
+          "COMMIT"
+        ],
+        "sqlstates": [],
+        "state_after": "I",
+        "state_before": "T"
+      },
+      "application_exit": -9,
+      "trace": [
+        {
+          "address": "127.0.0.1:57425",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "extended",
+            "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+            "sql": [
+              "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "UPDATE 1"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "extended",
+          "query_sha256": "4103d47994b665d2edcbedca71a7e3ab6a0e43f8de136dd515090f4c7162127f",
+          "sql": [
+            "UPDATE \"public\".\"Account\" SET \"credits\" = (\"public\".\"Account\".\"credits\" + $1) WHERE (\"public\".\"Account\".\"customerId\" = $2 AND 1=1) RETURNING \"public\".\"Account\".\"customerId\", \"public\".\"Account\".\"credits\""
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "commands": [
+              "COMMIT"
+            ],
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "sqlstates": [],
+            "state_after": "I",
+            "state_before": "T"
+          },
+          "event": "cut",
+          "phase": "after"
+        }
+      ],
+      "recovery_responses": [
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ],
+      "assertions": [
+        {
+          "name": "Ten purchased credits survive recovery",
+          "expected": "10",
+          "actual": "10",
+          "passed": true
+        },
+        {
+          "name": "One durable event receipt",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        }
+      ],
+      "recovery_trace": [
+        {
+          "address": "127.0.0.1:57437",
+          "event": "ready",
+          "version": "0.1.0"
+        },
+        {
+          "event": "armed"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 1,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 1,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 2,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [],
+          "connection": 1,
+          "event": "boundary",
+          "index": 2,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 3,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 3,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 4,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 4,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 5,
+            "protocol": "simple",
+            "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+            "sql": [
+              "BEGIN"
+            ],
+            "state_before": "I"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "BEGIN"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 5,
+          "protocol": "simple",
+          "query_sha256": "a8402858d4f1e1d27afee976520485ebb4b96a5387355b823f0d0b8079729032",
+          "sql": [
+            "BEGIN"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "I"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 6,
+            "protocol": "extended",
+            "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+            "sql": [
+              "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "INSERT 0 0"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 6,
+          "protocol": "extended",
+          "query_sha256": "842a1903420fe7f43bedb206a821557d7d4a30602261730a263620c11c586f75",
+          "sql": [
+            "INSERT INTO \"ProcessedWebhookEvent\" (\"id\", \"paymentProcessorEventId\", \"eventType\") VALUES ($1, $2, $3) ON CONFLICT (\"paymentProcessorEventId\") DO NOTHING"
+          ],
+          "sqlstates": [],
+          "state_after": "T",
+          "state_before": "T"
+        },
+        {
+          "boundary": {
+            "connection": 1,
+            "event": "boundary",
+            "index": 7,
+            "protocol": "simple",
+            "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+            "sql": [
+              "COMMIT"
+            ],
+            "state_before": "T"
+          },
+          "event": "begin"
+        },
+        {
+          "commands": [
+            "COMMIT"
+          ],
+          "connection": 1,
+          "event": "boundary",
+          "index": 7,
+          "protocol": "simple",
+          "query_sha256": "79663c1d3b43ceaf9ee728e501c64b57ae2e4d6cb36ff5c65eddcda1de27342f",
+          "sql": [
+            "COMMIT"
+          ],
+          "sqlstates": [],
+          "state_after": "I",
+          "state_before": "T"
+        }
+      ]
+    }
+  ],
+  "status": "pass",
+  "coverage": {
+    "observed_cycles": 6,
+    "tested_cuts": 12,
+    "possible_cuts": 12,
+    "passing": 12,
+    "violations": 0,
+    "inconclusive": 0
+  },
+  "elapsed_seconds": 5.079
+}
