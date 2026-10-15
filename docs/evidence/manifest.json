@@ -1,5 +1,5 @@
 {
-  "recorded_at_utc": "2026-10-15T15:23:55.570223+00:00",
+  "recorded_at_utc": "2026-10-15T15:31:45.139172+00:00",
   "platform": "Darwin arm64",
   "python": "3.13.5",
   "rust": "rustc 1.93.0 (254b59607 2026-01-19)",
@@ -12,7 +12,7 @@
     "python/commitcut/runner.py": "4fba6db7444f52f7f943201e6f6e28750e9cc5db606037e0419fcd5d576991ed",
     "python/commitcut/cli.py": "b5c7ff220a7d9b0c68408a9a2180501c0b4db5ebdb6f82c83b1eefb738a87372",
     "python/commitcut/report.py": "e2708bfeb398e2aa4e1559b7d9d72d5478511461d812498fa385418128bc66aa",
-    "python/commitcut/report.html": "4db7a8c6df01603104c4700ae5e24a357dc9dbc8598ab26e726b3829821845b7",
+    "python/commitcut/report.html": "b4de1edc5748af12eeb52a658b63e59ceb8882486e03aef97523004fbb9672a0",
     "examples/stripe-credits/server.mjs": "078e4127e7b6760e0ecbad4cf42ec7cbde3118880a641b84d3b5a0eb0da278a6",
     "examples/stripe-credits/invoice.json": "a065df15e3c1abcbcdaebdf2e9f9dbd144d4b364c4d870cc01b6c2ac85a796a4",
     "examples/opensaas/server.ts": "9248889daed16ecf27a027a7a1382eb2a71d8dad6efb8d1fe37c61b59b74510b",
@@ -23,6 +23,7 @@
     "atomic.json": "139b4e79d65427499341d53e5573411d37d3fe589ae1b498772fb720842609f7",
     "claim-first.json": "74667437d1398fa48f0c23b3b4bc8fc13f711f4f07c8831522d8b31390e08bed",
     "effect-first.json": "3e885d8758e55d3e654274e5e4041a561360df4fd5099b50a50bd523679ecc34",
+    "repeatability.json": "9bda599f36e3970d10725a1dedc49ef94bb5b06ab7a22f61a3328ba3d0ee63dd",
     "transactional-control.json": "e8da4f621d550b035d19da1eee6433bf1dcd9230838ae743f792392e8ad1b0aa",
     "upstream.json": "4c383ad74cc34a322f12e776b0f9328f8936eb1be58525cc9596f8ea2fe7cb47"
   },

@@ -37,4 +37,4 @@ Separate smoke tests passed through **real PostgreSQL SCRAM-SHA-256 authenticati
 
 The native engine is a testing proxy, not production infrastructure. These tests do not establish complete protocol coverage, live Stripe behavior, database crash durability, remote side-effect safety, every concurrent schedule, or a full OpenSaaS deployment's behavior. The exact upstream dependency-harness scope is documented [here](../examples/opensaas/README.md).
 
-Hosted Linux/PostgreSQL 16 and macOS unit CI are configured in the repository. Their actual run status is authoritative; this document's local evidence does not imply a hosted run passed.
+Hosted [Linux/PostgreSQL 16 and macOS CI](https://github.com/balkashynov/commitcut/actions/runs/38760158951) passed on initial release `e522ea8`: formatting, clippy, Rust and Python tests, real protocol checks, fresh package installation and all 42 integration cuts. See the repository's latest workflow status for subsequent commits.
