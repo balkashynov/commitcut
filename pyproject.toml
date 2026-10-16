@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "commitcut"
 version = "0.1.0"
-description = "Crash your webhook worker at PostgreSQL acknowledgement boundaries and verify recovery"
+description = "Stop your webhook app, restart it, retry the webhook, and check the data in PostgreSQL"
 requires-python = ">=3.11"
 license = "MIT"
 

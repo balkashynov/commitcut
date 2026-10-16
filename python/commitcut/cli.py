@@ -5,12 +5,12 @@ from .runner import Config, InvalidRun, run_matrix
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Kill a webhook worker at PostgreSQL acknowledgement boundaries and check recovery.")
-    parser.add_argument("config", help="Scenario TOML")
-    parser.add_argument("--output", required=True, help="New directory for local evidence")
-    parser.add_argument("--cut", type=int, help="Run one observed cycle instead of the full matrix")
-    parser.add_argument("--phase", choices=["before", "after"], help="Restrict cuts to one side of the cycle")
-    parser.add_argument("--include-sql", action="store_true", help="Include raw SQL in LOCAL traces; use synthetic fixtures")
+    parser = argparse.ArgumentParser(description="Stop your webhook app during a PostgreSQL request, restart it, retry the webhook, and check the saved data.")
+    parser.add_argument("config", help="TOML file with the app command, test webhook, and SQL checks")
+    parser.add_argument("--output", required=True, help="New folder for test results and app logs")
+    parser.add_argument("--cut", type=int, help="Test only this database request number")
+    parser.add_argument("--phase", choices=["before", "after"], help="Stop the app only before or only after PostgreSQL handles the request")
+    parser.add_argument("--include-sql", action="store_true", help="Save SQL text in the report; use made-up test data")
     args = parser.parse_args()
     if args.cut is not None and args.cut < 1:
         parser.error("--cut must be positive")

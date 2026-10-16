@@ -1,55 +1,83 @@
-# Protocol and failure contract
+# How CommitCut runs a crash test
 
-## One bounded question
+CommitCut checks what remains in PostgreSQL after an app crashes and receives the same webhook again. You supply SQL queries and expected results. For example, a query can check that a customer has 10 credits, rather than 0 or 20.
 
-After a particular PostgreSQL query cycle has or has not executed, can this application process die, restart, and handle the same request without violating the configured business assertions?
+## The test, step by step
 
-CommitCut first discovers an unfaulted execution. For each observed cycle, it runs a fresh scenario with a cut **before** forwarding the cycle or **after** receiving its complete backend response but **before** returning any response frame to the client. The application is killed with SIGKILL, its process-group leader is reaped, and the proxy is then terminated. The database process remains running. A fresh application receives the same request body with a fresh Stripe timestamp/signature; independent SQL queries check the final state.
+First, CommitCut runs the app without a crash. It sends the webhook, checks the database, restarts the app, sends the webhook again, and checks the database again. This first run must pass before crash tests start. It also records the app's database requests.
 
-A passing baseline must accept the first request, satisfy every assertion, survive restart, and accept duplicate redeliveries without violating those assertions. A failed baseline prevents a crash-safety claim. A protocol error, drift, missing boundary, timeout or failed recovery response is **inconclusive**, never a pass.
+For each recorded request, CommitCut resets the database and runs two separate tests:
 
-## Native engine
+- **Before:** stop the app before sending that request to PostgreSQL.
+- **After:** let PostgreSQL finish the request, hold back its whole reply, then stop the app.
 
-`native/src/wire.rs` validates PostgreSQL v3 length-delimited frames before allocation. A frame is capped at 16 MiB and one cycle at 32 MiB. Separate frontend/backend reader tasks prevent cancellation of a half-read frame during authentication. Startup and authentication messages are relayed; TLS/GSS negotiation is declined for this loopback test proxy.
+The Python test runner stops the app with `SIGKILL`, waits for its process-group leader to exit, and closes the database connections by stopping the proxy. PostgreSQL stays running. The runner then starts a new app process, sends the same webhook body with a new Stripe timestamp and signature, and runs the SQL checks through a separate connection.
 
-Simple `Query` messages are one cycle, including all statements in a multi-statement query. Extended protocol messages are accumulated through `Sync`. Prepared statement and portal names resolve `Parse`, `Bind` and `Execute` to SQL fingerprints. Values in `Bind` and result rows are forwarded as bytes and are never put in the trace.
+A timeout, failed retry, unsupported request, missing crash point, or changed query order produces an **inconclusive** result. This means the tool could not check the result reliably. It never counts as a pass.
 
-The complete response is buffered through `ReadyForQuery`. Buffering only `ReadyForQuery` is insufficient: a client can resolve a query after `CommandComplete`, allowing application work to escape the selected window. Conversely, `CommandComplete` alone is not proof of an implicit extended transaction's commit; `Sync` finishes it.
+## What counts as a database request
 
-Backend states are recorded directly:
+The proxy is a Rust program between the app and PostgreSQL. It reads PostgreSQL v3 messages and groups them into **query cycles**:
 
-| State | Meaning |
+- A simple `Query` message is one cycle. It may contain several SQL statements.
+- Extended-protocol messages are grouped up to `Sync`. A group may prepare a statement, describe it, or execute it.
+
+The report calls these groups “database requests.” The tool cannot stop between statements in the same group. In Prisma examples, preparing a statement and executing it can appear as separate rows. Preparing a statement does not save the change it describes.
+
+The proxy tracks prepared statement and portal names so it can associate `Parse`, `Bind`, and `Execute` messages with SQL. It forwards parameter values and result rows without putting them in the trace. It compares SQL hashes when checking that a later run has reached the same request.
+
+## Why the whole reply is held back
+
+For an “after” test, the proxy collects the response through PostgreSQL's `ReadyForQuery` message before stopping the app. It does not forward any part of that response to the app.
+
+Holding back only the last message would be too late. Some clients consider a query complete after `CommandComplete` and could start the next operation. At the same time, `CommandComplete` alone does not show that an implicit extended-protocol transaction has committed; `Sync` finishes that transaction.
+
+The report records PostgreSQL's transaction status:
+
+| Value | Meaning |
 | --- | --- |
-| `I` | Idle, outside a transaction |
-| `T` | In a transaction block |
-| `E` | In a failed transaction block |
+| `I` | Outside a transaction |
+| `T` | Inside a transaction |
+| `E` | Inside a transaction that has failed |
 
-`I` is **not a commit certificate**. `COMMIT` in an aborted transaction returns a `ROLLBACK` command tag. Reports retain both command tags and SQLSTATEs. PostgreSQL's actual constraints and visibility determine the assertions; CommitCut does not simulate them.
+`I` does not prove that a write was saved. For example, `COMMIT` in an already failed transaction can return `ROLLBACK`. The trace keeps command tags and SQLSTATE error codes. The final SQL checks read the actual database rather than guessing from a status flag.
 
-While armed, wire cycles are serialized through a shared gate. The selected cut holds the gate indefinitely until the supervisor stops the application and proxy. This is an application crash-boundary tool for a sequential fixture, not a scheduler for arbitrary concurrent workloads. Parallel application/database behavior may drift or time out and is not comprehensively covered.
+## Message sizes and connections
 
-## Process lifetime
+`native/src/wire.rs` checks message lengths before allocating memory. One message is limited to 16 MiB and a whole query cycle to 32 MiB. Separate tasks read from the app and database so cancellation during authentication does not discard half of a message.
 
-The Python supervisor starts the worker in a fresh process group. The process-group ID is derived from the child it created, never from scenario input. At a cut it kills that group and waits **before** closing frozen database sockets, so a connection exception cannot trigger cleanup instead of the intended crash. The native proxy has no child processes and is terminated directly. A disappearing supervisor's stdin causes the native engine to exit.
+Startup and authentication messages are forwarded. TLS and GSS encryption requests are declined. Use a local test connection without encryption; this is not a proxy for production traffic.
 
-Start commands are argument arrays. Reset/assertion SQL goes through `psql` with `ON_ERROR_STOP`; no Python `eval`, shell interpolation, or configurable kill PID is used. A local file lease prevents two CommitCut runners from resetting the same loopback database concurrently. It does not exclude unrelated database clients.
+During a test, a shared lock lets one query cycle through at a time. At the selected crash point, the proxy holds that lock until the runner stops the app and proxy. This supports the supplied examples, which send one webhook at a time. An app doing several things at once may change its query order or time out; these tests do not cover every possible ordering.
 
-## Replay identity
+## Starting and stopping processes
 
-A cut is identified by its ordinal, protocol mode, SQL-text SHA-256 and preceding transaction state. Before accepting a cut result, the observed prefix must match the unfaulted discovery run. This detects statement/control-flow drift. Bind values are not compared: autogenerated UUIDs and timestamps can legitimately differ. This is **boundary replay**, not byte-identical replay of an entire application or operating system. Repeating a full run is the check for behavioral reproducibility.
+The runner starts the app in a new process group. It gets the group ID from the process it started, not from the configuration file. It kills that group before closing the paused database connections. Otherwise, a connection error might let the app run cleanup code instead of crashing as intended.
 
-## Supported and rejected
+The proxy has no child processes and is stopped directly. It also exits if the runner closes its standard input.
 
-Supported and tested locally: PostgreSQL 15, pg 8 simple and extended queries, Prisma 5.19.1 preparation and execution cycles, named statement reuse, binary parameters, multi-statement simple queries, ordinary errors and transaction rollback.
+App commands are lists of arguments, not shell commands. Database reset and result checks use `psql` with `ON_ERROR_STOP`. The runner does not use Python `eval`, shell interpolation, or a user-supplied process ID to kill.
 
-Unsupported modes fail closed: `Flush`-driven exchanges, COPY, asynchronous notifications, suspended portals, cancel connections, non-v3 startup, oversized frames/cycles. TLS is not terminated; configure the disposable loopback test connection for plaintext. No production proxy, remote production endpoint, live Stripe account or real payment is required.
+A local lock file prevents two CommitCut runs from resetting the same database at once. It does not stop unrelated programs from using that database. Use a database dedicated to these tests.
 
-## Coverage limits
+## Repeating the same crash point
 
-- Only paths exercised by the supplied fixture, at observed wire-cycle boundaries. No failure between statements bundled in one simple query or one extended cycle.
-- Application fail-stop only. No database crash, power loss, corrupt disk, replication failover, or proof about fsync/durability settings.
-- No exhaustive thread/process/network schedule exploration and no claim of full-system determinism.
-- No general checkpointing of remote effects. Email, other APIs, queues and other databases need their own test adapters and assertions.
-- Health must indicate readiness without depending on the armed workload, and the response must represent completion of the state being asserted. Background jobs require a deliberate completion contract; this release does not infer quiescence.
-- Test resources must be disposable. The scenario explicitly supplies reset SQL and should use synthetic data. Default reports omit raw SQL, request bodies, credentials and row payloads, but configured assertion names/results and application log files may contain data supplied by the test author.
-- A pass means these cuts satisfied these assertions. Weak assertions produce weak evidence.
+Each crash point has a request number, protocol type, SQL SHA-256 hash, and transaction status before the request. The runner compares the requests up to that point with the first run. If they differ, it refuses to count the result as a pass.
+
+Parameter values are not compared. Generated IDs and timestamps can differ between runs. The tool repeats the selected database request position, not every instruction or network message in the app. Run the full test again to check whether its results repeat.
+
+## Supported requests
+
+The local tests cover PostgreSQL 15, `pg` 8 simple and extended queries, Prisma 5.19.1, named statement reuse, binary parameters, several statements in a simple query, SQL errors, and transaction rollback. Linux CI also runs against PostgreSQL 16.
+
+The tool rejects `Flush`-driven exchanges, COPY, asynchronous notifications, suspended portals, cancel connections, startup protocols other than v3, and messages above the size limits. It reports an error instead of continuing with an unreliable test.
+
+## Limits to keep in mind
+
+- It tests only the requests made by the supplied webhook. It cannot check code paths that were not run.
+- It stops only the app. It does not test database crashes, power loss, disk corruption, replication failover, or durability settings.
+- It does not try every possible ordering of threads, processes, or network messages.
+- It does not check emails, other APIs, queues, or other databases. They need separate test code and result checks.
+- The health endpoint must say when the app is ready. The webhook response must mean the work being checked is finished. Queued jobs need an explicit way to wait for completion; this release does not provide one.
+- The database is reset for each test. Use made-up data in a database you can erase. Reports omit raw SQL by default and do not include request bodies, credentials, or returned rows. Names and values in SQL checks, and the app's log files, may still contain data supplied by the test author.
+- A pass means only that the supplied checks passed at the tested crash points. If a check misses a problem, CommitCut will miss it too.

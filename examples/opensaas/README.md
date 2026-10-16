@@ -1,24 +1,30 @@
-# A pinned upstream helper, through real Prisma
+# Testing OpenSaaS's event helper
 
-This harness imports [`processedWebhookEvent.ts`](vendor/processedWebhookEvent.ts) **without source changes** from [OpenSaaS commit 925602ce](https://github.com/wasp-lang/open-saas/blob/925602ceafb5a0988a3b2ba72d754f022f121699/template/app/src/payment/processedWebhookEvent.ts), the head of merged [PR #732](https://github.com/wasp-lang/open-saas/pull/732). Its MIT license is retained in [vendor/LICENSE](vendor/LICENSE).
+This example uses [`processedWebhookEvent.ts`](vendor/processedWebhookEvent.ts) **without changes** from [OpenSaaS commit 925602ce](https://github.com/wasp-lang/open-saas/blob/925602ceafb5a0988a3b2ba72d754f022f121699/template/app/src/payment/processedWebhookEvent.ts), the head of merged [PR #732](https://github.com/wasp-lang/open-saas/pull/732). Its MIT license is kept in [vendor/LICENSE](vendor/LICENSE).
 
-The helper claims an event, invokes a callback, and removes the claim if the callback throws. A process crash cannot execute that catch block. If the claim already committed, a fresh process recognizes the retry as already handled even though its fulfillment callback never completed.
+The helper saves a row for the event, then calls a function to do the work. If that function throws an error, the helper deletes the row. But a crashed process cannot run that cleanup code. If the row was saved before the crash, the next process sees it and skips the retry, even if the work never finished.
 
-## What runs
+In our example, that work is adding 10 credits to an account. After some crashes, the customer still has 0 credits even though both retries return HTTP 204.
 
-- Exact upstream helper, transpiled by tsx. Its `wasp/server` import is only used as a TypeScript type and is erased; no fake runtime implementation is supplied.
-- Real generated Prisma 5.19.1 client and PostgreSQL protocol. The processed-event model matches the relevant upstream fields and uniqueness constraint.
-- Official Stripe 18.1.0 SDK signature verification, the version pinned by the inspected OpenSaaS application manifest.
-- A small HTTP dependency harness, a synthetic `invoice.paid` fixture and an `Account` credit callback.
-- Actual worker process-group SIGKILL, fresh process startup, two signed redeliveries, and independent SQL assertions.
+## What we ran
 
-The harness is **not the complete Wasp application**, does not exercise its full invoice lookup/mapping pipeline, and does not contact Stripe. The simplified credit callback and account schema are ours. The finding establishes the helper's behavior under this concrete callback and process-failure model, not the status of every downstream deployment.
+- The unchanged OpenSaaS helper, run with tsx. Its `wasp/server` import is used only as a TypeScript type and removed during compilation. We did not replace it with a fake Wasp server.
+- A real Prisma 5.19.1 client and PostgreSQL database. The event table has the relevant fields and unique constraint from OpenSaaS.
+- Stripe SDK 18.1.0 to check webhook signatures, matching the version listed by the inspected OpenSaaS app.
+- A small HTTP server, a made-up `invoice.paid` event, and our own function to add credits to an `Account` row.
+- A real `SIGKILL` of the app process group, a fresh app process, two retries of the same signed webhook, and SQL queries to check the saved data.
 
-`transactional-control.toml` uses our transactional claim-and-credit implementation as a negative control. It does not silently alter the upstream helper or present the control as a ready upstream patch. External effects such as email need a separate reliable handoff, and a database transaction alone does not make them exactly once.
+We did not run the whole Wasp application, its invoice lookup code, or a live Stripe payment. The small server, account table, and credit-adding function are ours. This shows how the helper behaves in this test; it does not establish what happens in every app that uses it.
 
-## Run
+## The version that saves both changes together
 
-From the repository root, with the dedicated database environment configured:
+`transactional-control.toml` tests our replacement. It records the event and adds credits in one database transaction. It is separate from the unchanged helper. It is not a proposed OpenSaaS patch.
+
+A database transaction can save these two database changes together. It cannot undo an email or a call to another service. Those need separate handling and tests.
+
+## Run the examples
+
+From the repository root, after setting up the local test database:
 
 ```sh
 npm ci --prefix examples/opensaas
@@ -27,6 +33,6 @@ PYTHONPATH=python python3 -m commitcut.cli examples/opensaas/upstream.toml --out
 PYTHONPATH=python python3 -m commitcut.cli examples/opensaas/transactional-control.toml --output .runs/control
 ```
 
-The upstream scenario is expected to exit `1` with missing credits. The control should exit `0`. `scripts/verify-examples.py --upstream` asserts both directions and exits successfully only when the expected failure and recovery results hold.
+The unchanged helper example should exit `1` because some crashes leave credits missing. Our version should exit `0`. `scripts/verify-examples.py --upstream` checks both results and succeeds only if the expected failures and passes occur.
 
-PR #732 already describes a separate claim/processing race and its accepted scope. No maintainer endorsement, new issue, production exploit, or live-service reproduction is claimed.
+PR #732 already discusses a separate problem with overlapping deliveries and what its change covers. We have not contacted the maintainers or shown a failure in a live deployment.

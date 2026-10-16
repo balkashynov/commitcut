@@ -3,7 +3,7 @@ name = "commitcut-proxy"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
-description = "PostgreSQL acknowledgement-boundary fault injector for application crash tests"
+description = "Hold PostgreSQL replies so a test runner can stop the app before it receives them"
 
 [[bin]]
 name = "commitcut-proxy"
