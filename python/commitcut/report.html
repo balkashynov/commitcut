@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Stop your webhook app during a database request, restart it, send the webhook again, and check the saved data. View results from real PostgreSQL tests.">
-<title>CommitCut: test your webhook after a crash</title>
+<meta name="description" content="Crash-test your Stripe webhook handler. Stop and restart your app, retry a test webhook, and check PostgreSQL for missing or duplicate credits.">
+<title>CommitCut: crash-test your Stripe webhook handler</title>
 <style>
 :root{--ink:#202522;--muted:#59615c;--paper:#fafbf9;--line:#d9ded8;--green:#21603c;--red:#a02f28;--amber:#805a12;--blue:#245a87}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue);text-underline-offset:3px}button,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
@@ -15,8 +15,9 @@ nav,main{max-width:1140px;margin:auto;padding:24px 32px}nav{display:flex;justify
 <body>
 <header><nav><a class="brand" href="#">CommitCut</a><a href="https://github.com/balkashynov/commitcut" id="source-top">Code and setup instructions</a></nav></header>
 <main>
-<h1>Test your webhook after a crash.</h1>
-<p class="intro">CommitCut stops your app during a database request, restarts it, sends the same test webhook again, and checks the data in PostgreSQL.</p>
+<h1>Crash-test your Stripe webhook handler.</h1>
+<p class="intro">CommitCut stops your app during a database request, restarts it, sends the same test Stripe webhook again, and checks the data in PostgreSQL.</p>
+<p class="small">An independent project, not made or endorsed by Stripe.</p>
 <p class="small">This page shows saved results from real tests. It does not run the tests in your browser. The included examples use made-up payments and accounts.</p>
 <div class="controls"><div class="select-wrap"><label for="scenario">Choose a test example</label><select id="scenario"></select></div><button class="plain" id="download">Download test results (JSON)</button></div>
 <section class="example" id="example" hidden aria-labelledby="example-title"><h2 id="example-title"></h2><p id="example-intro"></p><ol id="example-steps"></ol><button class="plain" id="compare" hidden></button></section>

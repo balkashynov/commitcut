@@ -1,8 +1,10 @@
 # CommitCut
 
-**Test whether your app still adds the right number of credits after it crashes.**
+**Crash-test your Stripe webhook handler.**
 
 CommitCut sends a test Stripe webhook to your app, stops the app during a database request, restarts it, and sends the same webhook again. It then checks the data in PostgreSQL. You can use it to test code that adds credits, gives access to a subscription, or records an order after a payment.
+
+An independent project, not made or endorsed by Stripe.
 
 ## The problem, with an example
 
